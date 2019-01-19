@@ -1,2 +1,4 @@
 = AUTH
 
+image:https://travis-ci.org/veronezi/auth.svg?branch=master["Build Status", link="https://travis-ci.org/veronezi/auth"]
+
