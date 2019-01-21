@@ -2,3 +2,15 @@
 
 image:https://travis-ci.org/veronezi/auth.svg?branch=master["Build Status", link="https://travis-ci.org/veronezi/auth"]
 
+== Whats in the box?
+
+=== `/jwt-auth` and `/jwt-auth-docker`
+
+`/jwt-auth` is a nodejs restful application used by the system as JWT provider.
+
+It exposes two endpoints: `POST /auth` and `GET /publickey`.
+
+The first endpoint is used by the `/api` application (here: `api/src/main/java/todo/api/ApiAuth.java`) whenever the user
+tries to authenticate.
+
+`/jwt-auth-docker` wraps the application above on it's own docker image.

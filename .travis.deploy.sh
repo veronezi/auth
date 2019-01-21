@@ -12,6 +12,7 @@ function deploy_docker_image () {
 }
 
 deploy_docker_image veronezi/auth-jwt
+deploy_docker_image veronezi/auth-keys
 deploy_docker_image veronezi/auth-facade
 
 echo "binaries uploaded"
