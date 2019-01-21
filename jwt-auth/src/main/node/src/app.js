@@ -19,7 +19,7 @@ const auth = (username, password, expiresIn) => {
     if(!username || !username.trim()) {
         throw "invalid username";
     }
-    return jwt.sign({
+    const result = jwt.sign({
         upn: username,
         sub: username,
         iss: "auth",
@@ -29,6 +29,8 @@ const auth = (username, password, expiresIn) => {
         expiresIn: expiresIn || "24h",
         algorithm: "RS256"
     });
+    console.log(`[auth] username="${username}" -> ${result}`);
+    return result;
 };
 
 const start = () => {
