@@ -10,6 +10,6 @@ test("it should get the proper jwt", () => {
     });
     const decoded = jwt.decode(token);
     console.log(decoded);
-    expect(decoded.groups.join(",")).toBe("auth");
+    expect(decoded.groups.join(",")).toBe("todo");
     expect(decoded.upn).toBe("tveronezi");
 });

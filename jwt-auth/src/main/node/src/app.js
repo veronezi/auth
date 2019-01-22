@@ -15,22 +15,24 @@ const port = 3000;
 const publicKey = fs.readFileSync(publicKeyPath, "utf8");
 const privateKey = fs.readFileSync(privateKeyPath, "utf8");
 
+// add the groups you need here. This will ultimately be used by annotations like...
+// @RolesAllowed({"todo"}) in a JakartaEE application.
+const groups = ["todo"];
+
 const auth = (username, password, expiresIn) => {
-    if(!username || !username.trim()) {
+    if (!username || !username.trim()) {
         throw "invalid username";
     }
-    const result = jwt.sign({
+    return jwt.sign({
         upn: username,
         sub: username,
         iss: "auth",
         aud: "auth",
-        groups: ["auth"]
+        groups
     }, privateKey, {
         expiresIn: expiresIn || "24h",
         algorithm: "RS256"
     });
-    console.log(`[auth] username="${username}" -> ${result}`);
-    return result;
 };
 
 const start = () => {
