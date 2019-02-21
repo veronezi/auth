@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+  static:
+    image: veronezi/auth-static:${STATIC_VERSION:-latest}
+
+  auth:
+    image: veronezi/auth-jwt:${AUTH_VERSION:-latest}
+
+  ui:
+    image: veronezi/auth-facade:${UI_VERSION:-latest}
+    ports:
+      - "${UI_PORT:-80}:80"
+

@@ -9,10 +9,11 @@
     "test-watch": "PUBLIC_KEY_DIR=./keys/public PRIVATE_KEY_DIR=./keys/private jest --watch"
   },
   "dependencies": {
-    "merge": ">=1.2.1",
     "body-parser": "^1.18.3",
     "express": "4.16.3",
-    "jsonwebtoken": "8.3.0"
+    "jsonwebtoken": "8.3.0",
+    "merge": ">=1.2.1",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "merge": ">=1.2.1",

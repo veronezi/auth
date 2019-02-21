@@ -10,6 +10,7 @@ COPY httpd.conf /usr/local/apache2/conf/
 COPY httpd-vhosts.conf /usr/local/apache2/conf/extra/
 
 ENV AUTH_DNS=auth
+ENV STATIC_DNS=static
 
 COPY  run.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/run.sh
