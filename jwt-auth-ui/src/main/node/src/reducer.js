@@ -1,6 +1,10 @@
 const init = {
     loadingMarkers: [],
-    events: []
+    events: {
+        rows: 0,
+        page: 1,
+        data: []
+    }
 };
 
 const EVENTS_LIST_UPDATED = "EVENTS_LIST_UPDATED";
@@ -12,7 +16,7 @@ const reducer = (state = init, action) => {
         case EVENTS_LIST_UPDATED: {
             return {
                 ...state,
-                events: action.payload && action.payload.length ? action.payload : []
+                events: action.payload
             }
         }
         case ADD_LOADING_MARKER: {

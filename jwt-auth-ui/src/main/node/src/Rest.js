@@ -1,6 +1,6 @@
 import axios from "axios";
 import store from "./store";
-import {ADD_LOADING_MARKER, REMOVE_LOADING_MARKER, EVENTS_LIST_UPDATED} from "./reducer";
+import {ADD_LOADING_MARKER, EVENTS_LIST_UPDATED, REMOVE_LOADING_MARKER} from "./reducer";
 
 const instance = axios.create({});
 
@@ -38,12 +38,14 @@ instance.interceptors.response.use(function (response) {
     return Promise.reject(error);
 });
 
-const loadEvents = () => instance.get("/api/events/1/2").then(resp => {
-    store.dispatch({
-        type: EVENTS_LIST_UPDATED,
-        payload: resp.data
-    });
-});
+const loadEvents = (page, pageSize) => {
+    instance.get(`/api/events/${page}/${pageSize}`).then(resp => {
+        store.dispatch({
+            type: EVENTS_LIST_UPDATED,
+            payload: resp.data
+        });
+    })
+};
 
 export default {
     loadEvents

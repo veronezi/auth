@@ -42,13 +42,20 @@ const getEventsPage = ({page, pagesize}) => {
     if (!page || !pagesize) {
         return events;
     }
-    const totalPages = Math.floor(events.length / pagesize) + 1;
-    if (page > totalPages) {
+    const intPage = Number(page);
+    const intPagesize = Number(pagesize);
+    const totalPages = Math.floor(events.length / intPagesize) + 1;
+    if (intPage > totalPages) {
         return [];
     }
-    const firstIndex = (page - 1) * pagesize;
-    const lastIndex = firstIndex + pagesize;
-    return events.slice(firstIndex, lastIndex);
+    const firstIndex = (intPage - 1) * intPagesize;
+    const lastIndex = firstIndex + intPagesize;
+    return {
+        page: intPage,
+        pages: totalPages,
+        rows: events.length,
+        data: events.slice(firstIndex, lastIndex)
+    };
 };
 
 const start = () => {
