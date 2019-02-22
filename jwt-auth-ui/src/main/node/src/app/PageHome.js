@@ -64,7 +64,7 @@ class PageHome extends Component {
                 ...this.state,
                 page
             });
-            rest.loadEvents(page + 1, this.state.rowsPerPage);
+            rest.getSessions(page + 1, this.state.rowsPerPage);
         }
     };
 
@@ -76,7 +76,7 @@ class PageHome extends Component {
                 ...this.state,
                 rowsPerPage: pageSize
             });
-            rest.loadEvents(this.state.page + 1, pageSize);
+            rest.getSessions(this.state.page + 1, pageSize);
         }
     };
 
