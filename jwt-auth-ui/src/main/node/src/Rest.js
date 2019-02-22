@@ -38,8 +38,8 @@ instance.interceptors.response.use(function (response) {
     return Promise.reject(error);
 });
 
-const loadEvents = (page, pageSize) => {
-    instance.get(`/api/events/${page}/${pageSize}`).then(resp => {
+const getSessions = (page, pageSize) => {
+    instance.get(`/api/sessions/${page}/${pageSize}`).then(resp => {
         store.dispatch({
             type: EVENTS_LIST_UPDATED,
             payload: resp.data
@@ -48,5 +48,5 @@ const loadEvents = (page, pageSize) => {
 };
 
 export default {
-    loadEvents
+    getSessions
 };

@@ -15,78 +15,146 @@ const port = 3000;
 
 const publicKey = fs.readFileSync(publicKeyPath, "utf8");
 const privateKey = fs.readFileSync(privateKeyPath, "utf8");
+const algorithm = "RS256";
 
 // add the groups you need here. This will ultimately be used by annotations like...
 // @RolesAllowed({"todo"}) in a JakartaEE application.
 const groups = ["todo"];
 
-const events = [];
+const refreshTokens = [];
 
-const auth = (username, password, expiresIn) => {
+const createAccessTokenObj = (username) => jwt.sign({
+    upn: username,
+    sub: username,
+    iss: "auth",
+    aud: "auth",
+    groups
+}, privateKey, {
+    expiresIn: "1m",
+    algorithm: algorithm
+});
+
+const getAccessToken = (username, password) => {
     if (!username || !username.trim()) {
         throw "invalid username";
     }
-    return jwt.sign({
+    if (username !== password) {
+        // demo purposes only. add the real authentication here.
+        throw "invalid credentials";
+    }
+    return createAccessTokenObj(username);
+};
+
+const getAccessTokenFromRefreshToken = (refreshToken) => {
+    if (!refreshToken || !refreshToken.trim()) {
+        throw "invalid refresh token";
+    }
+    jwt.verify(refreshToken, publicKey, {
+        algorithms: [algorithm]
+    });
+    const decoded = jwt.decode(refreshToken);
+    return createAccessTokenObj(decoded.upn);
+};
+
+const getRefreshToken = (username, existingId) => {
+    const id = uuid();
+    const token = jwt.sign({
         upn: username,
         sub: username,
         iss: "auth",
         aud: "auth",
-        groups
+        uuid: id
     }, privateKey, {
-        expiresIn: expiresIn || "24h",
-        algorithm: "RS256"
+        expiresIn: "1h",
+        algorithm: algorithm
     });
+    const decoded = jwt.decode(token, {complete: true});
+    if (existingId) {
+        refreshTokens.find((t) => t.id === existingId).expiresOn = decoded.payload.exp ? new Date(decoded.payload.exp * 1000) : null;
+    } else {
+        refreshTokens.push({
+            id,
+            username: username,
+            createdOn: new Date(),
+            expiresOn: decoded.payload.exp ? new Date(decoded.payload.exp * 1000) : null
+        });
+    }
+    return token;
 };
 
 const getEventsPage = ({page, pagesize}) => {
     if (!page || !pagesize) {
-        return events;
+        return {
+            page: 1,
+            pages: 1,
+            rows: refreshTokens.length,
+            data: refreshTokens
+        };
     }
     const intPage = Number(page);
     const intPagesize = Number(pagesize);
-    const totalPages = Math.floor(events.length / intPagesize) + 1;
+    const totalPages = Math.floor(refreshTokens.length / intPagesize) + 1;
     if (intPage > totalPages) {
-        return [];
+        return {
+            page: intPage,
+            pages: totalPages,
+            rows: refreshTokens.length,
+            data: []
+        };
     }
     const firstIndex = (intPage - 1) * intPagesize;
     const lastIndex = firstIndex + intPagesize;
     return {
         page: intPage,
         pages: totalPages,
-        rows: events.length,
-        data: events.slice(firstIndex, lastIndex)
+        rows: refreshTokens.length,
+        data: refreshTokens.slice(firstIndex, lastIndex)
+    };
+};
+
+const auth = (username, password) => {
+    const accessToken = getAccessToken(username, password);
+    const refreshToken = getRefreshToken(username);
+    return {
+        accessToken,
+        refreshToken
+    };
+};
+
+const refresh = (refreshToken) => {
+    const accessToken = getAccessTokenFromRefreshToken(refreshToken);
+    const decoded = jwt.decode(refreshToken, {complete: true});
+    const newRefreshToken = getRefreshToken(decoded.payload.upn, decoded.payload.uuid);
+    return {
+        accessToken,
+        refreshToken: newRefreshToken
     };
 };
 
 const start = () => {
     app.post("/auth", jsonParser, (req, res) => {
         try {
-            const token = auth(req.body.username, req.body.password, req.body.expiresIn);
-            events.push({
-                id: uuid(),
-                username: req.body.username,
-                date: new Date(),
-                success: true
-            });
-            res.send(token);
+            res.send(auth(req.body.username, req.body.password));
         } catch (e) {
-            events.push({
-                id: uuid(),
-                username: req.body.username,
-                date: new Date().getTime(),
-                success: false,
-                exception: e
-            });
+            res.status(401).send(e);
+        }
+    });
+    app.post("/refresh", jsonParser, (req, res) => {
+        try {
+            res.send(refresh(req.body.refreshToken));
+        } catch (e) {
             res.status(401).send(e);
         }
     });
     app.get("/publickey", (req, res) => res.send(publicKey));
-    app.get("/events/:page/:pagesize", (req, res) => res.send(getEventsPage(req.params)));
+    app.get("/sessions/:page/:pagesize", (req, res) => res.send(getEventsPage(req.params)));
     app.listen(port, () => console.log(`App listening on port ${port}!`));
 };
 
 module.exports = {
     auth,
+    refresh,
     publicKey,
-    start
+    start,
+    algorithm
 };

@@ -3,6 +3,7 @@ const init = {
     events: {
         rows: 0,
         page: 1,
+        pages: 1,
         data: []
     }
 };
