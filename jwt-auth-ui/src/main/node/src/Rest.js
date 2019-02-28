@@ -38,15 +38,19 @@ instance.interceptors.response.use(function (response) {
     return Promise.reject(error);
 });
 
-const getSessions = (page, pageSize) => {
-    instance.get(`/api/sessions/${page}/${pageSize}`).then(resp => {
-        store.dispatch({
-            type: EVENTS_LIST_UPDATED,
-            payload: resp.data
-        });
-    })
-};
+const getSessions = (page, pageSize) => instance.get(`/api/sessions/${page}/${pageSize}`).then(resp => {
+    store.dispatch({
+        type: EVENTS_LIST_UPDATED,
+        payload: resp.data
+    });
+});
+
+const authenticate = (user, password) => instance.post("/api/auth", {
+    username: user,
+    password
+});
 
 export default {
-    getSessions
+    getSessions,
+    authenticate
 };
