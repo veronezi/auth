@@ -79,7 +79,7 @@
                             <verbose>true</verbose>
                             <images>
                                 <image>
-                                    <name>veronezi/auth-static</name>
+                                    <name>veronezi/auth-ui</name>
                                     <build>
                                         <tags>
                                             <tag>${project.version}</tag>

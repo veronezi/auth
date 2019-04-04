@@ -21,7 +21,6 @@
     <modules>
         <module>jwt-auth</module>
         <module>jwt-auth-docker</module>
-        <module>facade-docker</module>
         <module>jwt-auth-ui</module>
         <module>jwt-auth-ui-docker</module>
     </modules>

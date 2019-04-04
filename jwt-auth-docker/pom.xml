@@ -97,7 +97,7 @@
                                     </build>
                                 </image>
                                 <image>
-                                    <name>veronezi/auth-jwt</name>
+                                    <name>veronezi/auth-api</name>
                                     <build>
                                         <tags>
                                             <tag>${project.version}</tag>

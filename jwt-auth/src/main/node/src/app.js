@@ -132,22 +132,22 @@ const refresh = (refreshToken) => {
 };
 
 const start = () => {
-    app.post("/auth", jsonParser, (req, res) => {
+    app.post("/api/auth", jsonParser, (req, res) => {
         try {
             res.send(auth(req.body.username, req.body.password));
         } catch (e) {
             res.status(401).send(e);
         }
     });
-    app.post("/refresh", jsonParser, (req, res) => {
+    app.post("/api/refresh", jsonParser, (req, res) => {
         try {
             res.send(refresh(req.body.refreshToken));
         } catch (e) {
             res.status(401).send(e);
         }
     });
-    app.get("/publickey", (req, res) => res.send(publicKey));
-    app.get("/sessions/:page/:pagesize", (req, res) => res.send(getEventsPage(req.params)));
+    app.get("/api/publickey", (req, res) => res.send(publicKey));
+    app.get("/api/sessions/:page/:pagesize", (req, res) => res.send(getEventsPage(req.params)));
     app.listen(port, () => console.log(`App listening on port ${port}!`));
 };
 

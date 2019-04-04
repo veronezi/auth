@@ -34,6 +34,10 @@ RUN apk add --no-cache bash
 COPY --from=dockerz /usr/local/bin/dockerize /usr/local/bin/
 COPY --from=jwt-auth-ui-build /opt/ui/build /usr/local/apache2/htdocs/
 COPY httpd.conf /usr/local/apache2/conf/
+COPY httpd-vhosts.conf /usr/local/apache2/conf/extra/
+
+ENV VERONEZI_AUTH_PATH=http://auth:3000
+
 COPY  run.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/run.sh
 ENTRYPOINT ["/usr/local/bin/run.sh"]
