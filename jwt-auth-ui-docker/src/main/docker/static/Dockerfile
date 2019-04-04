@@ -1,7 +1,7 @@
 ARG VERSION
 ARG NODE_VERSION
 
-FROM dockerize:${VERSION} AS dockerz
+FROM veronezi/dockerize:${DOCKERIZE_VERSION} AS dockerz
 
 # Install the node_modules from the package.json only. This way we void installing
 # the whole node_modules directory again everytime we change any of the application

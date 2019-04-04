@@ -1,6 +1,6 @@
 ARG VERSION
 
-FROM dockerize:${VERSION} AS dockerz
+FROM veronezi/dockerize:${DOCKERIZE_VERSION} AS dockerz
 FROM httpd:2.4.34-alpine
 
 RUN apk add --no-cache bash

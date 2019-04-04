@@ -1,7 +1,7 @@
 ARG VERSION
 ARG NODE_VERSION
 
-FROM dockerize:${VERSION} AS dockerz
+FROM veronezi/dockerize:${DOCKERIZE_VERSION} AS dockerz
 FROM veronezi/auth-keys:${VERSION} AS keys
 FROM node:${NODE_VERSION}-alpine AS auth-ui-build
 

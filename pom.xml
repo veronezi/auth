@@ -13,17 +13,15 @@
     <properties>
         <node.version>10.15.0</node.version>
         <docker.plugin.version>0.26.1</docker.plugin.version>
-        <dockerize_version>0.6.1</dockerize_version>
         <headless>true</headless>
         <VERSION>${project.version}</VERSION>
         <NODE_VERSION>${node.version}</NODE_VERSION>
-        <DOCKERIZE_VERSION>v${dockerize_version}</DOCKERIZE_VERSION>
+        <DOCKERIZE_VERSION>0.0.1-b3</DOCKERIZE_VERSION>
     </properties>
     <modules>
         <module>jwt-auth</module>
         <module>jwt-auth-docker</module>
         <module>facade-docker</module>
-        <module>thirdparty-docker</module>
         <module>jwt-auth-ui</module>
         <module>jwt-auth-ui-docker</module>
     </modules>
