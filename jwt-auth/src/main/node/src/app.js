@@ -9,6 +9,8 @@ const jsonParser = bodyParser.json();
 
 const publicKeyPath = path.resolve(process.env.PUBLIC_KEY_DIR, "auth_rsa.pub");
 const privateKeyPath = path.resolve(process.env.PRIVATE_KEY_DIR, "auth_rsa");
+const accessTokenExpiration = process.env.AUTH_ACCESS_TOKEN_EXPIRATION_TIME;
+const refreshTokenExpiration = process.env.AUTH_REFRESH_TOKEN_EXPIRATION_TIME;
 
 const app = express();
 const port = 3000;
@@ -30,7 +32,7 @@ const createAccessTokenObj = (username) => jwt.sign({
     aud: "auth",
     groups
 }, privateKey, {
-    expiresIn: "1m",
+    expiresIn: accessTokenExpiration,
     algorithm: algorithm
 });
 
@@ -65,7 +67,7 @@ const getRefreshToken = (username, existingId) => {
         aud: "auth",
         uuid: id
     }, privateKey, {
-        expiresIn: "1h",
+        expiresIn: refreshTokenExpiration,
         algorithm: algorithm
     });
     const decoded = jwt.decode(token, {complete: true});

@@ -18,6 +18,8 @@ RUN chown node:node -R /opt
 
 ENV PUBLIC_KEY_DIR=/opt/keys/public
 ENV PRIVATE_KEY_DIR=/opt/keys/private
+ENV AUTH_ACCESS_TOKEN_EXPIRATION_TIME=10m
+ENV AUTH_REFRESH_TOKEN_EXPIRATION_TIME=1h
 
 RUN apk add --no-cache bash
 COPY --from=dockerz /usr/local/bin/dockerize /usr/local/bin/
