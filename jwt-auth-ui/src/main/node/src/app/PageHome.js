@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {useState} from "react";
 import Loading from "./Loading";
 import classNames from "classnames";
 import jss from "./PageHome.jss";
@@ -12,78 +12,58 @@ const initPageSize = 25;
 const initPage = 0;
 rest.getSessions(initPage + 1, initPageSize);
 
-class PageHome extends Component {
-    state = {
-        rowsPerPage: initPageSize,
-        page: initPage,
-        testOpen: false
-    };
+const PageHome = ({classes}) => {
+    const [pageSize, setPageSize] = useState(initPageSize);
+    const [page, setPage] = useState(initPage);
+    const [testOpen, setTestOpen] = useState(false);
 
-    handleChangePage = (page) => {
-        const oldPage = this.state.page;
-        if (oldPage !== page) {
-            this.setState({
-                ...this.state,
-                page
-            });
-            rest.getSessions(page + 1, this.state.rowsPerPage);
+    const handleChangePage = (newPage) => {
+        if (newPage !== page) {
+            setPage(newPage);
+            rest.getSessions(newPage + 1, pageSize);
         }
     };
 
-    handleChangeRowsPerPage = (pageSize) => {
-        const oldPagesize = this.state.rowsPerPage;
-        if (oldPagesize !== pageSize) {
-            this.setState({
-                ...this.state,
-                rowsPerPage: pageSize
-            });
-            rest.getSessions(this.state.page + 1, pageSize);
+    const handleChangeRowsPerPage = (newPageSize) => {
+        if (newPageSize !== pageSize) {
+            setPageSize(newPageSize);
+            rest.getSessions(page + 1, newPageSize);
         }
     };
 
-    onCloseTest() {
-        this.setState({
-            ...this.state,
-            testOpen: false
-        });
-    }
+    const onCloseTest = () => {
+        setTestOpen(false);
+    };
 
-    onOpenTest() {
-        this.setState({
-            ...this.state,
-            testOpen: true
-        });
-    }
+    const onOpenTest = () => {
+        setTestOpen(true);
+    };
 
-    onAuthenticate(name, password) {
+    const onAuthenticate = (name, password) => {
         rest.authenticate(name, password).then(() => {
-            const {rowsPerPage, page} = this.state;
-            rest.getSessions(page + 1, rowsPerPage);
+            rest.getSessions(page + 1, pageSize);
         });
-    }
+    };
 
-    render() {
-        const {classes} = this.props;
-        const {rowsPerPage, testOpen} = this.state;
-        return (
-            <div className={classNames(classes.root)}>
-                <Loading/>
-                <SessionTest
-                    open={testOpen}
-                    onClose={() => this.onCloseTest()}
-                    onAuthenticate={(name, password) => this.onAuthenticate(name, password)}/>
-                <SessionsTable
-                    handleChangeRowsPerPage={(pageSize) => this.handleChangeRowsPerPage(pageSize)}
-                    handleChangePage={(page) => this.handleChangePage(page)}
-                    rowsPerPage={rowsPerPage}
-                />
-                <Fab color="primary" aria-label={testTitle} className={classes.testIcon}
-                     onClick={() => this.onOpenTest()}>
-                    <KeyIcon/>
-                </Fab>
-            </div>
-        );
-    }
-}
+    return (
+        <div className={classNames(classes.root)}>
+            <Loading/>
+            <SessionTest
+                open={testOpen}
+                onClose={() => onCloseTest()}
+                onAuthenticate={(name, password) => onAuthenticate(name, password)}/>
+            <SessionsTable
+                handleChangeRowsPerPage={(newPageSize) => handleChangeRowsPerPage(newPageSize)}
+                handleChangePage={(newPage) => handleChangePage(newPage)}
+                rowsPerPage={pageSize}
+            />
+            <Fab color="primary" aria-label={testTitle} className={classes.testIcon}
+                 onClick={() => onOpenTest()}>
+                <KeyIcon/>
+            </Fab>
+        </div>
+    );
+
+};
 
 export default jss(PageHome);
