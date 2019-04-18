@@ -12,6 +12,9 @@ const privateKeyPath = path.resolve(process.env.PRIVATE_KEY_DIR, "auth_rsa");
 const accessTokenExpiration = process.env.AUTH_ACCESS_TOKEN_EXPIRATION_TIME;
 const refreshTokenExpiration = process.env.AUTH_REFRESH_TOKEN_EXPIRATION_TIME;
 
+const tokenIss = process.env.AUTH_TOKEN_ISS;
+const tokenAud = process.env.AUTH_TOKEN_AUD;
+
 const app = express();
 const port = 3000;
 
@@ -21,15 +24,15 @@ const algorithm = "RS256";
 
 // add the groups you need here. This will ultimately be used by annotations like...
 // @RolesAllowed({"todo"}) in a JakartaEE application.
-const groups = ["todo"];
+const groups = process.env.AUTH_TOKEN_GROUPS_CSV.split(',').map(g => g.trim()).filter(g => g);
 
 const refreshTokens = [];
 
 const createAccessTokenObj = (username) => jwt.sign({
     upn: username,
     sub: username,
-    iss: "auth",
-    aud: "auth",
+    iss: tokenIss,
+    aud: tokenAud,
     groups
 }, privateKey, {
     expiresIn: accessTokenExpiration,
@@ -63,8 +66,8 @@ const getRefreshToken = (username, existingId) => {
     const token = jwt.sign({
         upn: username,
         sub: username,
-        iss: "auth",
-        aud: "auth",
+        iss: tokenIss,
+        aud: tokenAud,
         uuid: id
     }, privateKey, {
         expiresIn: refreshTokenExpiration,

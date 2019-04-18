@@ -16,41 +16,29 @@ const PageHome = ({classes}) => {
     const [pageSize, setPageSize] = useState(initPageSize);
     const [page, setPage] = useState(initPage);
     const [testOpen, setTestOpen] = useState(false);
-
     const handleChangePage = (newPage) => {
         if (newPage !== page) {
             setPage(newPage);
             rest.getSessions(newPage + 1, pageSize);
         }
     };
-
     const handleChangeRowsPerPage = (newPageSize) => {
         if (newPageSize !== pageSize) {
             setPageSize(newPageSize);
             rest.getSessions(page + 1, newPageSize);
         }
     };
-
-    const onCloseTest = () => {
-        setTestOpen(false);
-    };
-
-    const onOpenTest = () => {
-        setTestOpen(true);
-    };
-
     const onAuthenticate = (name, password) => {
         rest.authenticate(name, password).then(() => {
             rest.getSessions(page + 1, pageSize);
         });
     };
-
     return (
         <div className={classNames(classes.root)}>
             <Loading/>
             <SessionTest
                 open={testOpen}
-                onClose={() => onCloseTest()}
+                onClose={() => setTestOpen(false)}
                 onAuthenticate={(name, password) => onAuthenticate(name, password)}/>
             <SessionsTable
                 handleChangeRowsPerPage={(newPageSize) => handleChangeRowsPerPage(newPageSize)}
@@ -58,7 +46,7 @@ const PageHome = ({classes}) => {
                 rowsPerPage={pageSize}
             />
             <Fab color="primary" aria-label={testTitle} className={classes.testIcon}
-                 onClick={() => onOpenTest()}>
+                 onClick={() => setTestOpen(true)}>
                 <KeyIcon/>
             </Fab>
         </div>

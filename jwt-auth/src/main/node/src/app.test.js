@@ -7,7 +7,7 @@ test("it should get the proper jwt", () => {
         algorithms: [app.algorithm]
     });
     const decoded = jwt.decode(result.accessToken);
-    expect(decoded.groups.join(",")).toBe("todo");
+    expect(decoded.groups.join(",")).toBe("todo,crawler");
     expect(decoded.upn).toBe("tveronezi");
     app.refresh(result.refreshToken);
 });

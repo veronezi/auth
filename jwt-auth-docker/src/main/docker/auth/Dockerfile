@@ -20,6 +20,9 @@ ENV PUBLIC_KEY_DIR=/opt/keys/public
 ENV PRIVATE_KEY_DIR=/opt/keys/private
 ENV AUTH_ACCESS_TOKEN_EXPIRATION_TIME=10m
 ENV AUTH_REFRESH_TOKEN_EXPIRATION_TIME=1h
+ENV AUTH_TOKEN_ISS=auth
+ENV AUTH_TOKEN_AUD=auth
+ENV AUTH_TOKEN_GROUPS_CSV=todo,crawler
 
 RUN apk add --no-cache bash
 COPY --from=dockerz /usr/local/bin/dockerize /usr/local/bin/
