@@ -1,0 +1,9 @@
+dependencies:
+
+- name: api
+  version: 0.1.0
+  repository: file://./charts/api
+
+- name: ui
+  version: 0.1.0
+  repository: file://./charts/ui
