@@ -55,9 +55,12 @@
                             <target>
                                 <exec executable="docker">
                                     <arg value="run"/>
+                                    <arg value="-t"/>
                                     <arg value="--rm"/>
                                     <arg value="-v"/>
                                     <arg value="${project.build.directory}/helm:/opt"/>
+                                    <arg value="-w"/>
+                                    <arg value="/opt"/>
                                     <arg value="dtzar/helm-kubectl"/>
                                     <arg value="bash"/>
                                     <arg value="package.sh"/>
