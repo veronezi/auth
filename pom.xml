@@ -19,6 +19,7 @@
         <DOCKERIZE_VERSION>0.0.1-b3</DOCKERIZE_VERSION>
     </properties>
     <modules>
+        <module>infra</module>
         <module>jwt-auth</module>
         <module>jwt-auth-docker</module>
         <module>jwt-auth-ui</module>

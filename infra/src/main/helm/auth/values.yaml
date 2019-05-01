@@ -1,0 +1,9 @@
+api:
+  image:
+    repository: veronezi/auth-api
+    tag: ${project.version}
+
+ui:
+  image:
+    repository: veronezi/auth-ui
+    tag: ${project.version}
