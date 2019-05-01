@@ -20,10 +20,10 @@
     </properties>
     <modules>
         <module>infra</module>
-        <module>jwt-auth</module>
-        <module>jwt-auth-docker</module>
-        <module>jwt-auth-ui</module>
-        <module>jwt-auth-ui-docker</module>
+        <module>api</module>
+        <module>api-docker</module>
+        <module>ui</module>
+        <module>ui-docker</module>
     </modules>
     <repositories>
         <repository>
