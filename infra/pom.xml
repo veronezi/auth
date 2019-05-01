@@ -62,10 +62,6 @@
                                     <arg value="bash"/>
                                     <arg value="package.sh"/>
                                 </exec>
-                                <exec dir="${project.build.directory}/helm" executable="helm">
-                                    <arg value="package"/>
-                                    <arg value="auth"/>
-                                </exec>
                             </target>
                         </configuration>
                         <goals>
