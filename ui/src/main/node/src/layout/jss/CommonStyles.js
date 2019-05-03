@@ -7,6 +7,22 @@ const grey = "#fafafa";
 const lightGrey = "#ffffff";
 const highlighed = "#dce8ec";
 const transitionDuration = 300;
+const slideStyles = {
+    "&.slide-enter": {
+        transition: `transform ${transitionDuration}ms ease-in-out`,
+        transform: "translate(100%)",
+    },
+    "&.slide-enter-active": {
+        transform: "translate(0)",
+    },
+    "&.slide-exit-active": {
+        transform: "translate(100%)",
+    },
+    "&.slide-exit": {
+        transition: `transform ${transitionDuration}ms ease-in-out`,
+        transform: "translate(-100%)",
+    },
+};
 
 export {
     expandedLeftSize,
@@ -17,5 +33,6 @@ export {
     grey,
     lightGrey,
     highlighed,
-    transitionDuration
+    transitionDuration,
+    slideStyles
 }

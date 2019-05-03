@@ -1,5 +1,5 @@
 import injectSheet from "react-jss";
-import {collapsedLeftSize, expandedLeftSize, padding, grey, transitionDuration} from "./CommonStyles";
+import {collapsedLeftSize, expandedLeftSize, padding, grey, slideStyles} from "./CommonStyles";
 
 const styles = (theme) => ({
     root: {
@@ -22,20 +22,7 @@ const styles = (theme) => ({
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        "&.slide-enter": {
-            transition: `transform ${transitionDuration}ms ease-in-out`,
-            transform: "translate(100%)",
-        },
-        "&.slide-enter-active": {
-            transform: "translate(0)",
-        },
-        "&.slide-exit-active": {
-            transform: "translate(100%)",
-        },
-        "&.slide-exit": {
-            transition: `transform ${transitionDuration}ms ease-in-out`,
-            transform: "translate(-100%)",
-        },
+        ...slideStyles
     },
     linkCollapsed: {
         display: "none"
