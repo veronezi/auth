@@ -16,11 +16,12 @@ const SideMenu = ({classes, pages, collapsed, className}) => {
                     <CSSTransition key={location.key} timeout={transitionDuration} classNames={"slide"}>
                         <Switch location={location}>
                             {pages.map((page, index) => (
-                                <Route key={`${index}_route_side_menu`} exact={page.target.exact} path={page.target.path}
+                                <Route key={`${index}_route_side_menu`} exact={page.target.exact}
+                                       path={page.target.path}
                                        render={() => (
                                            <div className={classes.content}>
                                                <div>
-                                                   <SideMenuEntryBack backTo={page.backTo} collapsed={collapsed} />
+                                                   <SideMenuEntryBack backTo={page.backTo} collapsed={collapsed}/>
                                                    {page.sideBar.filter((sm) => !sm.bottom).map((sm, i) => (
                                                        <SideMenuEntry sm={sm} key={`${i}_top_side_menu`}
                                                                       index={`${i}_top_side_menu`}

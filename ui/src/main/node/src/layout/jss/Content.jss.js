@@ -1,5 +1,5 @@
 import injectSheet from "react-jss";
-import {lightGrey, fadeStyles} from "./CommonStyles";
+import {fadeStyles, lightGrey} from "./CommonStyles";
 
 const styles = () => ({
     root: {

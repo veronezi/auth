@@ -12,13 +12,14 @@ const Content = ({classes, pages, className}) => (
                 <CSSTransition key={location.key} timeout={transitionDuration} classNames={"slide"}>
                     <Switch location={location}>
                         {pages.map((page, index) => (
-                            <Route key={`${index}_route_content`} exact={page.target.exact} path={page.target.path} render={() => {
-                                return (
-                                    <div className={classes.content}>
-                                        {page.target.content}
-                                    </div>
-                                );
-                            }}/>
+                            <Route key={`${index}_route_content`} exact={page.target.exact} path={page.target.path}
+                                   render={() => {
+                                       return (
+                                           <div className={classes.content}>
+                                               {page.target.content}
+                                           </div>
+                                       );
+                                   }}/>
                         ))}
                     </Switch>
                 </CSSTransition>

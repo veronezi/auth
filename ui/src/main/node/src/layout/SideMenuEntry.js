@@ -14,7 +14,7 @@ const SideMenuEntryBack = jss(({backTo, collapsed, classes}) => {
     }
     const title = `Back to ${backTo.title}`;
     const result = (
-        <Link to={backTo.path}  className={classNames(classes.root, {
+        <Link to={backTo.path} className={classNames(classes.root, {
             [classes.panelCollapsed]: collapsed
         })}>
             <div className={classes.icon}><ArrowLeft/></div>

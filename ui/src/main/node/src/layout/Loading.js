@@ -4,7 +4,7 @@ import LinearProgress from "@material-ui/core/LinearProgress/LinearProgress";
 import jss from "./jss/Loading.jss";
 
 const Loading = ({loading, classes}) => {
-    if(!loading) {
+    if (!loading) {
         return null;
     }
     return (

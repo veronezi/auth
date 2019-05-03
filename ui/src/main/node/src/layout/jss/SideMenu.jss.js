@@ -1,5 +1,5 @@
 import injectSheet from "react-jss";
-import {collapsedLeftSize, expandedLeftSize, padding, grey, slideStyles} from "./CommonStyles";
+import {collapsedLeftSize, expandedLeftSize, grey, padding, slideStyles} from "./CommonStyles";
 
 const styles = (theme) => ({
     root: {

@@ -21,7 +21,6 @@ const getInitValues = (config) => {
     if (storage.getItem(key)) {
         saveInit = JSON.parse(storage.getItem(key))
     }
-    console.log("saved init", saveInit);
     return {
         ...config.init,
         ...saveInit
