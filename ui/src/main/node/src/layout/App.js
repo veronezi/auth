@@ -10,25 +10,62 @@ import ArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import ArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import Button from "@material-ui/core/Button";
 
+
+const getInitValues = (config) => {
+    const key = config.storagePrefix ? config.storagePrefix : "system-values-";
+    const storage = window.sessionStorage;
+    let saveInit = {
+        collapsed: true,
+        hidden: false,
+    };
+    if (storage.getItem(key)) {
+        saveInit = JSON.parse(storage.getItem(key))
+    }
+    console.log("saved init", saveInit);
+    return {
+        ...config.init,
+        ...saveInit
+    }
+};
+
+const saveInit = (config, init) => {
+    const key = config.storagePrefix ? config.storagePrefix : "system-values-";
+    const storage = window.sessionStorage;
+    storage.setItem(key, JSON.stringify(init));
+};
+
 const App = ({classes, config}) => {
-    const {pages, collapsed} = config;
-    const [collapsedState, setCollapsed] = useState(collapsed);
-    const [hidden, setHidden] = useState(false);
+    const {pages} = config;
+    const init = getInitValues(config);
+    const [collapsed, setCollapsed] = useState(init.collapsed);
+    const [hidden, setHidden] = useState(init.hidden);
+    const setCollapsedIntercept = (value) => {
+        init.collapsed = value;
+        saveInit(config, init);
+        setCollapsed(value);
+    };
+    const setHiddenIntercept = (value) => {
+        init.hidden = value;
+        saveInit(config, init);
+        setHidden(value);
+    };
     return (
         <BrowserRouter>
             <Loading/>
             <div className={classes.root}>
                 <div className={classes.left}>
-                    <PageTitle className={classes.top} pages={pages} hidden={hidden} collapsed={collapsedState} />
-                    <SideMenu pages={pages} hidden={hidden} collapsed={collapsedState} />
-                    <Button variant="contained" size="small" color="primary" className={classes.collapseBtn} onClick={() => {
-                        setCollapsed(!collapsedState);
-                    }}>
-                        {collapsedState ? <ArrowRight className={classes.collapseIcon}/> : (<ArrowLeft className={classes.collapseIcon}/>)}
+                    <PageTitle className={classes.top} pages={pages} hidden={hidden} collapsed={collapsed}/>
+                    <SideMenu pages={pages} hidden={hidden} collapsed={collapsed}/>
+                    <Button variant="contained" size="small" color="primary" className={classes.collapseBtn}
+                            onClick={() => {
+                                setCollapsedIntercept(!collapsed);
+                            }}>
+                        {collapsed ? <ArrowRight className={classes.collapseIcon}/> : (
+                            <ArrowLeft className={classes.collapseIcon}/>)}
                     </Button>
                 </div>
                 <div className={classes.right}>
-                    <MenuBar className={classes.top} pages={pages} hidden={hidden} setHidden={setHidden} />
+                    <MenuBar className={classes.top} pages={pages} hidden={hidden} setHidden={setHiddenIntercept}/>
                     <Content pages={pages}/>
                 </div>
             </div>

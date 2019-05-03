@@ -19,7 +19,10 @@ ReactDOM.render((<Provider store={store}>
     <MuiThemeProvider theme={theme}>
         <CssBaseline/>
         <App config={{
-            collapsed: true,
+            storagePrefix: "auth-",
+            init: {
+                collapsed: true,
+            },
             pages: [{
                 target: home,
                 sideBar: [sessions, config, logout]
