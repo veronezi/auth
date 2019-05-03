@@ -1,5 +1,5 @@
 import injectSheet from "react-jss";
-import {headerSize} from "./CommonStyles";
+import {headerSize, expandedLeftSize, collapsedLeftSize, transitionDuration} from "./CommonStyles";
 
 const global = {
     "body": {
@@ -17,15 +17,51 @@ const styles = () => ({
     root: {
         height: `calc(100vh - ${headerSize})`,
         display: "flex",
+
+        "&.fade-appear": {
+            opacity: 0
+        },
+        "&.fade-appear-active": {
+            transition: `opacity ${transitionDuration * 2}ms linear`,
+            opacity: 1
+        },
+        "&.hiddenPanel": {
+            position: "relative",
+            "& .left": {
+                position: "absolute",
+                top: 0,
+                bottom: 0,
+                left: 0,
+                width: expandedLeftSize
+
+            },
+            "& .right": {
+                position: "absolute",
+                top: 0,
+                bottom: 0,
+                left: expandedLeftSize,
+                right: 0
+            },
+            "&.collapsedPanel": {
+                "& .left": {
+                    width: collapsedLeftSize
+
+                },
+                "& .right": {
+                    left: collapsedLeftSize,
+                },
+            },
+        },
+        "& .left": {
+            position: "relative",
+        },
+        "& .right": {
+            flexGrow: 1
+        },
+
     },
     top: {
         height: headerSize,
-    },
-    right: {
-        flexGrow: 1
-    },
-    left: {
-        position: "relative",
     },
     collapseBtn: {
         position: "absolute",
@@ -39,7 +75,7 @@ const styles = () => ({
     collapseIcon: {
         transform: "rotate(-45deg)",
         fontSize: 18,
-    }
+    },
 });
 
 export default ((cls) => injectSheet(styles)(cls));

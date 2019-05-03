@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import classNames from "classnames";
 import jss from "./PageHome.jss";
 import rest from "../Rest";
@@ -9,7 +9,6 @@ import Fab from "@material-ui/core/Fab";
 
 const initPageSize = 25;
 const initPage = 0;
-rest.getSessions(initPage + 1, initPageSize);
 
 const PageHome = ({classes}) => {
     const [pageSize, setPageSize] = useState(initPageSize);
@@ -32,6 +31,9 @@ const PageHome = ({classes}) => {
             rest.getSessions(page + 1, pageSize);
         });
     };
+    useEffect(() => {
+        rest.getSessions(initPage + 1, initPageSize);
+    });
     return (
         <div className={classNames(classes.root)}>
             <SessionTest

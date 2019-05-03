@@ -9,6 +9,8 @@ import SideMenu from "./SideMenu";
 import ArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import ArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import Button from "@material-ui/core/Button";
+import classNames from "classnames";
+import {CSSTransition} from "react-transition-group";
 
 
 const getInitValues = (config) => {
@@ -54,23 +56,33 @@ const App = ({classes, config}) => {
     return (
         <BrowserRouter>
             <Loading/>
-            <div className={classes.root}>
-                <div className={classes.left}>
-                    <PageTitle className={classes.top} pages={pages} hidden={hidden} collapsed={collapsed}/>
-                    <SideMenu pages={pages} hidden={hidden} collapsed={collapsed}/>
-                    <Button variant="contained" size="small" color="primary" className={classes.collapseBtn}
-                            onClick={() => {
-                                setCollapsedIntercept(!collapsed);
-                            }}>
-                        {collapsed ? <ArrowRight className={classes.collapseIcon}/> : (
-                            <ArrowLeft className={classes.collapseIcon}/>)}
-                    </Button>
+            <CSSTransition
+                in={true}
+                appear={true}
+                timeout={1000}
+                classNames="fade"
+            >
+                <div className={classNames(classes.root, {
+                    "hiddenPanel": hidden,
+                    "collapsedPanel": collapsed
+                })}>
+                    <div className={"left"}>
+                        <PageTitle className={classes.top} pages={pages} hidden={hidden} collapsed={collapsed}/>
+                        <SideMenu pages={pages} hidden={hidden} collapsed={collapsed}/>
+                        <Button variant="contained" size="small" color="primary" className={classes.collapseBtn}
+                                onClick={() => {
+                                    setCollapsedIntercept(!collapsed);
+                                }}>
+                            {collapsed ? <ArrowRight className={classes.collapseIcon}/> : (
+                                <ArrowLeft className={classes.collapseIcon}/>)}
+                        </Button>
+                    </div>
+                    <div className={"right"}>
+                        <MenuBar className={classes.top} pages={pages} hidden={hidden} setHidden={setHiddenIntercept}/>
+                        <Content pages={pages}/>
+                    </div>
                 </div>
-                <div className={classes.right}>
-                    <MenuBar className={classes.top} pages={pages} hidden={hidden} setHidden={setHiddenIntercept}/>
-                    <Content pages={pages}/>
-                </div>
-            </div>
+            </CSSTransition>
         </BrowserRouter>
     );
 };

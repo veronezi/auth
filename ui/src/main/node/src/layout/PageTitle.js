@@ -5,7 +5,7 @@ import jss from "./jss/PageTitle.jss";
 import {CSSTransition, TransitionGroup} from "react-transition-group";
 import {transitionDuration} from "./jss/CommonStyles";
 
-const PageTitle = ({classes, pages, collapsed, className}) => (
+const PageTitle = ({classes, pages, collapsed, hidden, className}) => (
     <div className={classNames(className, classes.root)}>
         <Route render={({location}) => (
             <TransitionGroup component={null}>
@@ -15,11 +15,11 @@ const PageTitle = ({classes, pages, collapsed, className}) => (
                             <Route key={`${index}_route_page_title`} exact={page.target.exact} path={page.target.path}
                                    render={() => (
                                        <div className={classNames(classes.content, {
-                                           [classes.panelCollapsed]: collapsed
+                                           [classes.panelCollapsed]: collapsed || hidden
                                        })}>
                                            <div className={classes.icon}>{page.target.icon}</div>
                                            <div
-                                               className={classNames({[classes.detailsCollapsed]: collapsed})}>{page.target.title}</div>
+                                               className={classNames({[classes.detailsCollapsed]: collapsed || hidden})}>{page.target.title}</div>
                                        </div>
                                    )}/>
                         ))}

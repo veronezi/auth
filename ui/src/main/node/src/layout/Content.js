@@ -5,6 +5,13 @@ import classNames from "classnames";
 import {CSSTransition, TransitionGroup} from "react-transition-group";
 import {transitionDuration} from "./jss/CommonStyles";
 
+const getContent = (original) => {
+    if (typeof original === 'function') {
+        return original();
+    }
+    return original;
+};
+
 const Content = ({classes, pages, className}) => (
     <div className={classNames(className, classes.root)}>
         <Route render={({location}) => (
@@ -16,7 +23,7 @@ const Content = ({classes, pages, className}) => (
                                    render={() => {
                                        return (
                                            <div className={classes.content}>
-                                               {page.target.content}
+                                               {getContent(page.target.content)}
                                            </div>
                                        );
                                    }}/>
