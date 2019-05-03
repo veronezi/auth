@@ -23,6 +23,21 @@ const styles = () => ({
     },
     right: {
         flexGrow: 1
+    },
+    left: {
+        position: "relative",
+    },
+    collapseBtn: {
+        position: "absolute",
+        top: `calc(${headerSize} + 10px)`,
+        right: -9,
+        padding: 0,
+        minWidth: "auto",
+        transform: "rotate(45deg)",
+    },
+    collapseIcon: {
+        transform: "rotate(-45deg)",
+        fontSize: 18
     }
 });
 

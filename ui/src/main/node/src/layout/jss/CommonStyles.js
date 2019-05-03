@@ -6,6 +6,7 @@ const darkGrey = "#eeeeee";
 const grey = "#fafafa";
 const lightGrey = "#ffffff";
 const highlighed = "#dce8ec";
+const transitionDuration = 300;
 
 export {
     expandedLeftSize,
@@ -15,5 +16,6 @@ export {
     darkGrey,
     grey,
     lightGrey,
-    highlighed
+    highlighed,
+    transitionDuration
 }
