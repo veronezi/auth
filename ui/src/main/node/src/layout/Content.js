@@ -7,7 +7,6 @@ import {transitionDuration} from "./jss/CommonStyles";
 
 const Content = ({classes, pages, className}) => (
     <div className={classNames(className, classes.root)}>
-
         <Route render={({location}) => (
             <TransitionGroup component={null}>
                 <CSSTransition key={location.key} timeout={transitionDuration} classNames={"slide"}>

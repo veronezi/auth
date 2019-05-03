@@ -6,7 +6,7 @@ const config = {
     path: "/",
     icon: (<HomeIcon/>),
     title: "Auth",
-    menuBar: (<div/>),
+    menuBar: (<div><span>Home</span></div>),
     content: (<div style={{backgroundColor: "pink", width: "100%", height: "100%"}}/>)
 };
 

@@ -7,7 +7,7 @@ const config = {
     path: "/sessions",
     icon: (<SessionsIcon/>),
     title: "Sessions",
-    menuBar: (<div/>),
+    menuBar: (<div><span>Sessions</span></div>),
     content: (<PageHome/>)
 };
 
