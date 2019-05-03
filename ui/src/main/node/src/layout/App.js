@@ -8,16 +8,17 @@ import Content from "./Content";
 import SideMenu from "./SideMenu";
 
 
-const App = ({classes, pages}) => {
-    const [collapsed, setCollapsed] = useState(false);
+const App = ({classes, config}) => {
+    const {pages, collapsed} = config;
+    const [collapsedState, setCollapsed] = useState(collapsed);
     const [hidden, setHidden] = useState(false);
     return (
         <BrowserRouter>
             <Loading/>
             <div className={classes.root}>
                 <div>
-                    <PageTitle className={classes.top} pages={pages} hidden={hidden} collapsed={collapsed} setCollapsed={setCollapsed}/>
-                    <SideMenu pages={pages} hidden={hidden} collapsed={collapsed} setCollapsed={setCollapsed}/>
+                    <PageTitle className={classes.top} pages={pages} hidden={hidden} collapsed={collapsedState} setCollapsed={setCollapsed}/>
+                    <SideMenu pages={pages} hidden={hidden} collapsed={collapsedState} setCollapsed={setCollapsed}/>
                 </div>
                 <div className={classes.right}>
                     <MenuBar className={classes.top} pages={pages} hidden={hidden} setHidden={setHidden} />

@@ -15,23 +15,24 @@ import config from "./pages/Config";
 import sessions from "./pages/Sessions";
 import logout from "./pages/Logout";
 
-const pages = [{
-    target: home,
-    sideBar: [sessions, config, logout]
-}, {
-    target: sessions,
-    sideBar: [logout],
-    backTo: home
-}, {
-    target: config,
-    sideBar: [logout],
-    backTo: home
-}];
-
 ReactDOM.render((<Provider store={store}>
     <MuiThemeProvider theme={theme}>
         <CssBaseline/>
-        <App pages={pages}/>
+        <App config={{
+            collapsed: true,
+            pages: [{
+                target: home,
+                sideBar: [sessions, config, logout]
+            }, {
+                target: sessions,
+                sideBar: [logout],
+                backTo: home
+            }, {
+                target: config,
+                sideBar: [logout],
+                backTo: home
+            }]
+        }}/>
     </MuiThemeProvider>
 </Provider>), document.getElementById("root"));
 registerServiceWorker();
