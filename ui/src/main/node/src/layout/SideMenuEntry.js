@@ -17,7 +17,7 @@ const SideMenuEntryBack = jss(({backTo, collapsed, classes}) => {
         <Link to={backTo.path} className={classNames(classes.root, {
             [classes.panelCollapsed]: collapsed
         })}>
-            <div className={classes.icon}><ArrowLeft/></div>
+            <div className={classNames(classes.icon, "arrow")}><ArrowLeft/></div>
             <div className={classNames(classes.details, {[classes.collapsed]: collapsed})}>
                 <span className={classes.text}>{title}</span>
             </div>
@@ -44,7 +44,7 @@ const SideMenuEntry = ({classes, sm, index, collapsed}) => {
                 <div className={classes.icon}>{sm.icon}</div>
                 <div className={classNames(classes.details, {[classes.detailsCollapsed]: collapsed})}>
                     <div><span className={classes.text}>{sm.title}</span></div>
-                    <div>{rightIcon}</div>
+                    <div className={"arrow"}>{rightIcon}</div>
                 </div>
             </div>
         );
@@ -56,7 +56,7 @@ const SideMenuEntry = ({classes, sm, index, collapsed}) => {
                 <div className={classes.icon}>{sm.icon}</div>
                 <div className={classNames(classes.details, {[classes.detailsCollapsed]: collapsed})}>
                     <div><span className={classes.text}>{sm.title}</span></div>
-                    <div>{rightIcon}</div>
+                    <div className={"arrow"}>{rightIcon}</div>
                 </div>
             </Link>
         );

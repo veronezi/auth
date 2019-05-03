@@ -1,6 +1,7 @@
 import injectSheet from "react-jss";
-import {highlighed} from "./CommonStyles";
+import {highlighed, transitionDuration} from "./CommonStyles";
 
+const animationLength = 2;
 const styles = (theme) => ({
     root: {
         display: "flex",
@@ -11,8 +12,28 @@ const styles = (theme) => ({
         padding: theme.spacing.unit,
         "&:hover": {
             cursor: "pointer",
-            backgroundColor: highlighed
+            backgroundColor: highlighed,
+            "& .arrow": {
+                animation: `arrow ${transitionDuration * 2}ms 1`
+            }
         },
+    },
+    '@keyframes arrow': {
+        "0%": {
+            transform: "translate(0px, 0px)"
+        },
+        "25%": {
+            transform: `translate(-${animationLength}px, 0px)`
+        },
+        "50%": {
+            transform: "translate(0px, 0px)"
+        },
+        "75%": {
+            transform: `translate(${animationLength}px, 0px)`
+        },
+        "100%": {
+            transform: "translate(0px, 0px)"
+        }
     },
     panelCollapsed: {
         borderRadius: 0,

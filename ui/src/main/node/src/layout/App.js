@@ -21,10 +21,13 @@ const getInitValues = (config) => {
     if (storage.getItem(key)) {
         saveInit = JSON.parse(storage.getItem(key))
     }
-    return {
-        ...config.init,
-        ...saveInit
+    if(config.init) {
+        return {
+            ...config.init,
+            ...saveInit
+        }
     }
+    return saveInit;
 };
 
 const saveInit = (config, init) => {
