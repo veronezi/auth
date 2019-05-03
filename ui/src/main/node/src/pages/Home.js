@@ -7,7 +7,7 @@ const config = {
     icon: (<HomeIcon/>),
     title: "Auth",
     menuBar: (<div/>),
-    content: (<div/>)
+    content: (<div style={{backgroundColor: "pink", width: "100%", height: "100%"}}/>)
 };
 
 export default config;

@@ -34,10 +34,11 @@ const styles = () => ({
         padding: 0,
         minWidth: "auto",
         transform: "rotate(45deg)",
+        zIndex: 1000,
     },
     collapseIcon: {
         transform: "rotate(-45deg)",
-        fontSize: 18
+        fontSize: 18,
     }
 });
 

@@ -12,7 +12,6 @@ const styles = (theme) => ({
         bottom: 0,
         left: 0,
         right: 0,
-
         width: expandedLeftSize,
         transition: `width ${theme.transitions.easing.easeInOut} ${theme.transitions.duration.standard}ms`,
         backgroundColor: grey,

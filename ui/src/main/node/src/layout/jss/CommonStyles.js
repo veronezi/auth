@@ -23,7 +23,20 @@ const slideStyles = {
         transform: "translate(-100%)",
     },
 };
-
+const fadeStyles = {
+    opacity: 1,
+    transition: `opacity ${transitionDuration / 2}ms ease-in-out`,
+    "&.slide-enter": {
+        opacity: 0
+    },
+    "&.slide-enter-active": {
+        transitionDelay: `${transitionDuration / 2}ms`,
+        opacity: 1
+    },
+    "&.slide-exit": {
+        opacity: 0
+    },
+};
 export {
     expandedLeftSize,
     collapsedLeftSize,
@@ -34,5 +47,6 @@ export {
     lightGrey,
     highlighed,
     transitionDuration,
-    slideStyles
+    slideStyles,
+    fadeStyles
 }
