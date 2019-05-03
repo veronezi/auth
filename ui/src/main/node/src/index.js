@@ -11,16 +11,21 @@ import theme from "./theme";
 import "typeface-roboto";
 
 import home from "./pages/Home";
+import config from "./pages/Config";
 import sessions from "./pages/Sessions";
 import logout from "./pages/Logout";
 
 const pages = [{
     target: home,
-    sideBar: [sessions, logout]
+    sideBar: [sessions, config, logout]
 }, {
     target: sessions,
     sideBar: [logout],
-    backTo: [home]
+    backTo: home
+}, {
+    target: config,
+    sideBar: [logout],
+    backTo: home
 }];
 
 ReactDOM.render((<Provider store={store}>

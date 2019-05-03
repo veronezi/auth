@@ -1,11 +1,16 @@
 import React from "react";
 import {connect} from "react-redux";
 import LinearProgress from "@material-ui/core/LinearProgress/LinearProgress";
-import jss from "./Loading.jss";
+import jss from "./jss/Loading.jss";
 
-const Loading = ({loading, classes}) => (
-    <LinearProgress className={classes.root} value={100} variant={loading ? "indeterminate" : "determinate"}/>
-);
+const Loading = ({loading, classes}) => {
+    if(!loading) {
+        return null;
+    }
+    return (
+        <LinearProgress className={classes.root} value={100} variant={"indeterminate"}/>
+    );
+};
 
 const mapStateToProps = state => {
     return {

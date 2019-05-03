@@ -5,9 +5,9 @@ const config = {
     exact: true,
     path: "/",
     icon: (<HomeIcon/>),
-    title: "Home",
-    menuBar: (<div>menu bar</div>),
-    content: (<div>content</div>)
+    title: "Auth",
+    menuBar: (<div/>),
+    content: (<div/>)
 };
 
 export default config;

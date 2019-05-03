@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import Loading from "./Loading";
 import classNames from "classnames";
 import jss from "./PageHome.jss";
 import rest from "../Rest";
@@ -35,7 +34,6 @@ const PageHome = ({classes}) => {
     };
     return (
         <div className={classNames(classes.root)}>
-            <Loading/>
             <SessionTest
                 open={testOpen}
                 onClose={() => setTestOpen(false)}

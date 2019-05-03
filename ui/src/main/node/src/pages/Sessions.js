@@ -1,13 +1,14 @@
 import SessionsIcon from "@material-ui/icons/PermIdentity";
 import React from "react";
+import PageHome from "../app/PageHome";
 
 const config = {
     exact: false,
     path: "/sessions",
     icon: (<SessionsIcon/>),
     title: "Sessions",
-    menuBar: (<div>menu bar</div>),
-    content: (<div>content</div>)
+    menuBar: (<div/>),
+    content: (<PageHome/>)
 };
 
 export {
