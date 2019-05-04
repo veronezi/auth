@@ -46,41 +46,47 @@ const TablePaginationActions = jss(({classes, count, page, rowsPerPage, theme, o
 
 const SessionsTable = ({classes, events, rowsPerPage, handleChangeRowsPerPage, handleChangePage}) => (
     <div className={classes.root}>
-        <Table className={classes.table}>
-            <TableHead>
-                <TableRow>
-                    <TableCell className={classes.idColumn}>Session ID</TableCell>
-                    <TableCell>Username</TableCell>
-                    <TableCell className={classes.dateColumn}>Created</TableCell>
-                    <TableCell className={classes.dateColumn}>Expires</TableCell>
-                </TableRow>
-            </TableHead>
-            <TableBody>
-                {events.data.map(row => (
-                    <TableRow key={row.id}>
-                        <TableCell className={classes.idColumn}>{row.id}</TableCell>
-                        <TableCell>{row.username}</TableCell>
-                        <TableCell
-                            className={classes.dateColumn}>{moment(row.createdOn).format("YYYY-MM-DD HH:mm")}</TableCell>
-                        <TableCell
-                            className={classes.dateColumn}>{row.expiresOn ? moment(row.expiresOn).format("YYYY-MM-DD HH:mm") : ""}</TableCell>
+        <div className={classes.table}>
+            <Table>
+                <TableHead>
+                    <TableRow>
+                        <TableCell className={classes.idColumn}>Session ID</TableCell>
+                        <TableCell>Username</TableCell>
+                        <TableCell className={classes.dateColumn}>Created</TableCell>
+                        <TableCell className={classes.dateColumn}>Expires</TableCell>
                     </TableRow>
-                ))}
-            </TableBody>
-            <TableFooter className={classes.tableFooter}>
-                <TableRow>
-                    <TablePagination
-                        rowsPerPageOptions={[5, 10, 25, 50, 100]}
-                        count={events.rows}
-                        rowsPerPage={rowsPerPage}
-                        page={events.page - 1}
-                        onChangePage={(event, page) => handleChangePage(page)}
-                        onChangeRowsPerPage={(event) => handleChangeRowsPerPage(Number(event.target.value))}
-                        ActionsComponent={TablePaginationActions}
-                    />
-                </TableRow>
-            </TableFooter>
-        </Table>
+                </TableHead>
+                <TableBody>
+                    {events.data.map(row => (
+                        <TableRow key={row.id}>
+                            <TableCell className={classes.idColumn}>{row.id}</TableCell>
+                            <TableCell>{row.username}</TableCell>
+                            <TableCell
+                                className={classes.dateColumn}>{moment(row.createdOn).format("YYYY-MM-DD HH:mm")}</TableCell>
+                            <TableCell
+                                className={classes.dateColumn}>{row.expiresOn ? moment(row.expiresOn).format("YYYY-MM-DD HH:mm") : ""}</TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+        </div>
+        <div className={classes.tableFooter}>
+            <Table>
+                <TableFooter>
+                    <TableRow>
+                        <TablePagination
+                            rowsPerPageOptions={[5, 10, 25, 50, 100]}
+                            count={events.rows}
+                            rowsPerPage={rowsPerPage}
+                            page={events.page - 1}
+                            onChangePage={(event, page) => handleChangePage(page)}
+                            onChangeRowsPerPage={(event) => handleChangeRowsPerPage(Number(event.target.value))}
+                            ActionsComponent={TablePaginationActions}
+                        />
+                    </TableRow>
+                </TableFooter>
+            </Table>
+        </div>
     </div>
 );
 

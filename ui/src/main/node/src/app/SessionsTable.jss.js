@@ -7,23 +7,26 @@ const styles = (theme) => ({
         bottom: 0,
         right: 0,
         left: 0,
-        overflow: "auto"
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between"
     },
     table: {
-        tableLayout: "fixed",
-        width: "100%",
-        whiteSpace: "nowrap",
-        "& td": {
+        flexGrow: 1,
+        overflow: "auto",
+        "& > table": {
+            tableLayout: "fixed",
+            width: "100%",
             whiteSpace: "nowrap",
-            overflow: "hidden",
-            textOverflow: "ellipsis"
+            "& td": {
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis"
+            }
         }
     },
     tableFooter: {
         backgroundColor: theme.palette.common.white,
-        position: "fixed",
-        bottom: 0,
-        width: "100%",
         "& tr, & td": {
             display: "block",
             width: "100%"

@@ -9,6 +9,7 @@ import Fab from "@material-ui/core/Fab";
 
 const initPageSize = 25;
 const initPage = 0;
+let loaded = false;
 
 const PageHome = ({classes}) => {
     const [pageSize, setPageSize] = useState(initPageSize);
@@ -32,7 +33,10 @@ const PageHome = ({classes}) => {
         });
     };
     useEffect(() => {
-        rest.getSessions(initPage + 1, initPageSize);
+        if(!loaded) {
+            loaded = true;
+            rest.getSessions(initPage + 1, initPageSize);
+        }
     });
     return (
         <div className={classNames(classes.root)}>
