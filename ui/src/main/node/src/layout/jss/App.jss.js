@@ -1,5 +1,5 @@
 import injectSheet from "react-jss";
-import {headerSize, expandedLeftSize, collapsedLeftSize, transitionDuration, transitionHideDuration} from "./CommonStyles";
+import {collapsedLeftSize, expandedLeftSize, headerSize, transitionDuration} from "./CommonStyles";
 
 const global = {
     "body": {
@@ -25,88 +25,27 @@ const styles = () => ({
             transition: `opacity ${transitionDuration * 2}ms linear`,
             opacity: 1
         },
-
-
-
-
-
-        "&.hiddenPanel, &.hidden-exit, &.hidden-exit-active, &.hidden-enter, &.hidden-enter-active": {
-            position: "relative",
-            "& .left": {
-                position: "absolute",
-                top: 0,
-                bottom: 0,
-                left: 0,
-                width: expandedLeftSize
-
-            },
-            "& .right": {
-                position: "absolute",
-                top: 0,
-                bottom: 0,
-                width: `calc(100% - ${expandedLeftSize})`,
-                right: 0
-            },
-            "& .left, & .right": {
-                transition: `transform ${transitionHideDuration}ms linear, width ${transitionHideDuration}ms linear`,
-            },
-            "&.collapsedPanel": {
-                "& .left": {
-                    width: collapsedLeftSize
-
-                },
-                "& .right": {
-                    width: `calc(100% - ${collapsedLeftSize})`,
-                },
-            },
-        },
-
-
-
-        "&.hidden-enter-active, &.hidden-enter-done": {
-            "& .left": {
-                transform: `translate(-${expandedLeftSize}, 0)`
-            },
-            "&.collapsedPanel": {
-                "& .left": {
-                    transform: `translate(-${collapsedLeftSize}, 0)`
-
-                },
-            },
-        },
-        "&.hidden-exit": {
-            "& .left": {
-                transform: `translate(-${expandedLeftSize}, 0)`
-            },
-            "&.collapsedPanel": {
-                "& .left": {
-                    transform: `translate(-${collapsedLeftSize}, 0)`
-
-                },
-            },
-            "&.hidden-exit-active": {
-                "& .left": {
-                    transform: "translate(0, 0)"
-                },
-                "&.collapsedPanel": {
-                    "& .left": {
-                        transform: "translate(0, 0)"
-                    },
-                },
-            },
-        },
-
-
-
-
-
         "& .left": {
             position: "relative",
+            transition: `width ${transitionDuration}ms linear`,
+            width: expandedLeftSize,
         },
         "& .right": {
             flexGrow: 1
         },
-
+        "&.hidden-enter, &.hidden-enter-active, &.hidden-enter-done": {
+            "& .left": {
+                overflow: "hidden",
+                width: 0
+            },
+        },
+    },
+    hiddenPanel: {},
+    collapsedPanel: {
+        "& .left": {
+            position: "relative",
+            width: collapsedLeftSize,
+        },
     },
     top: {
         height: headerSize,

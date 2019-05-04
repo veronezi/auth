@@ -54,9 +54,6 @@ const styles = (theme) => ({
             alignItems: "center",
         }
     },
-    detailsCollapsed: {
-        display: "none"
-    },
     text: {
         whiteSpace: "nowrap"
     }

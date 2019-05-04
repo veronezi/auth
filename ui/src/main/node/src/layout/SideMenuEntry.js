@@ -18,9 +18,9 @@ const SideMenuEntryBack = jss(({backTo, collapsed, classes}) => {
             [classes.panelCollapsed]: collapsed
         })}>
             <div className={classNames(classes.icon, "arrow")}><ArrowLeft/></div>
-            <div className={classNames(classes.details, {[classes.collapsed]: collapsed})}>
+            {!collapsed && <div className={classes.details}>
                 <span className={classes.text}>{title}</span>
-            </div>
+            </div>}
         </Link>
     );
     if (collapsed) {
@@ -42,10 +42,10 @@ const SideMenuEntry = ({classes, sm, index, collapsed}) => {
                 [classes.panelCollapsed]: collapsed
             })} onClick={sm.action}>
                 <div className={classes.icon}>{sm.icon}</div>
-                <div className={classNames(classes.details, {[classes.detailsCollapsed]: collapsed})}>
+                {!collapsed && <div className={classNames(classes.details, {[classes.detailsCollapsed]: collapsed})}>
                     <div><span className={classes.text}>{sm.title}</span></div>
                     <div className={"arrow"}>{rightIcon}</div>
-                </div>
+                </div>}
             </div>
         );
     } else {
@@ -54,10 +54,10 @@ const SideMenuEntry = ({classes, sm, index, collapsed}) => {
                 [classes.panelCollapsed]: collapsed
             })}>
                 <div className={classes.icon}>{sm.icon}</div>
-                <div className={classNames(classes.details, {[classes.detailsCollapsed]: collapsed})}>
+                {!collapsed && <div className={classes.details}>
                     <div><span className={classes.text}>{sm.title}</span></div>
                     <div className={"arrow"}>{rightIcon}</div>
-                </div>
+                </div>}
             </Link>
         );
     }

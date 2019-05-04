@@ -1,17 +1,13 @@
 import injectSheet from "react-jss";
-import {collapsedLeftSize, expandedLeftSize, grey, padding, slideStyles} from "./CommonStyles";
+import {grey, headerSize, padding, slideStyles} from "./CommonStyles";
 
-const styles = (theme) => ({
+const styles = () => ({
     root: {
         backgroundColor: grey,
         position: "relative",
         overflow: "hidden",
-        width: expandedLeftSize,
-        height: "100%",
-        transition: `width ${theme.transitions.easing.easeInOut} ${theme.transitions.duration.standard}ms`,
-    },
-    panelCollapsed: {
-        width: collapsedLeftSize
+        width: "100%",
+        height: `calc(100% - ${headerSize})`,
     },
     content: {
         position: "absolute",
@@ -23,9 +19,6 @@ const styles = (theme) => ({
         flexDirection: "column",
         justifyContent: "space-between",
         ...slideStyles
-    },
-    linkCollapsed: {
-        display: "none"
     }
 });
 

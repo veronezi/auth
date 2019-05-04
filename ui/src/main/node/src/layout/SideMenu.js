@@ -8,9 +8,7 @@ import {CSSTransition, TransitionGroup} from "react-transition-group";
 
 const SideMenu = ({classes, pages, collapsed, className}) => {
     return (
-        <div className={classNames(className, classes.root, {
-            [classes.panelCollapsed]: collapsed
-        })}>
+        <div className={classNames(className, classes.root)}>
             <Route render={({location}) => (
                 <TransitionGroup component={null}>
                     <CSSTransition key={location.key} timeout={transitionDuration} classNames={"slide"}>
@@ -50,19 +48,3 @@ const SideMenu = ({classes, pages, collapsed, className}) => {
 };
 
 export default jss(SideMenu);
-
-/*
-<Route render={({location}) => (
-    <div className={classNames({[classes.wrapper]: true, "backward": !forward, "forward": forward})}>
-      <TransitionGroup component={null}>
-        <CSSTransition key={location.key} timeout={duration} classNames={"slide"}>
-          <Switch location={location}>
-            <Route exact path="/" component={InfinityNavigationMenu}/>
-            <Route path="/solutions" component={MenuApplications}/>
-            <Route path="/network-topology" component={MenuNetworkVisualization}/>
-          </Switch>
-        </CSSTransition>
-      </TransitionGroup>
-    </div>
-)}/>
- */

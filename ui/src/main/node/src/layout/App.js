@@ -59,27 +59,29 @@ const App = ({classes, config}) => {
             <Loading/>
             <CSSTransition in={true} appear={true} timeout={transitionDuration} classNames="fade">
                 <CSSTransition in={hidden} appear={hidden} timeout={transitionHideDuration} classNames="hidden">
-                    <div className={classNames(classes.root, {
-                        "hiddenPanel": hidden,
-                        "collapsedPanel": collapsed
-                    })}>
-                        <div className={"left"}>
-                            <PageTitle className={classes.top} pages={pages} hidden={hidden} collapsed={collapsed}/>
-                            <SideMenu pages={pages} hidden={hidden} collapsed={collapsed}/>
-                            <Button variant="contained" size="small" color="primary" className={classes.collapseBtn}
-                                    onClick={() => {
-                                        setCollapsedIntercept(!collapsed);
-                                    }}>
-                                {collapsed ? <ArrowRight className={classes.collapseIcon}/> : (
-                                    <ArrowLeft className={classes.collapseIcon}/>)}
-                            </Button>
+                    <CSSTransition in={collapsed} appear={collapsed} timeout={transitionHideDuration} classNames="collapsed">
+                        <div className={classNames(classes.root, {
+                            [classes.hiddenPanel]: hidden,
+                            [classes.collapsedPanel]: collapsed
+                        })}>
+                            <div className={"left"}>
+                                <PageTitle className={classes.top} pages={pages} hidden={hidden} collapsed={collapsed}/>
+                                <SideMenu pages={pages} hidden={hidden} collapsed={collapsed}/>
+                                <Button variant="contained" size="small" color="primary" className={classes.collapseBtn}
+                                        onClick={() => {
+                                            setCollapsedIntercept(!collapsed);
+                                        }}>
+                                    {collapsed ? <ArrowRight className={classes.collapseIcon}/> : (
+                                        <ArrowLeft className={classes.collapseIcon}/>)}
+                                </Button>
+                            </div>
+                            <div className={"right"}>
+                                <MenuBar className={classes.top} pages={pages} hidden={hidden}
+                                         setHidden={setHiddenIntercept}/>
+                                <Content pages={pages}/>
+                            </div>
                         </div>
-                        <div className={"right"}>
-                            <MenuBar className={classes.top} pages={pages} hidden={hidden}
-                                     setHidden={setHiddenIntercept}/>
-                            <Content pages={pages}/>
-                        </div>
-                    </div>
+                    </CSSTransition>
                 </CSSTransition>
             </CSSTransition>
         </BrowserRouter>
