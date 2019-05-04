@@ -7,6 +7,7 @@ const grey = "#fafafa";
 const lightGrey = "#ffffff";
 const highlighed = "#dce8ec";
 const transitionDuration = 300;
+const transitionHideDuration = 300;
 const slideStyles = {
     "&.slide-enter": {
         transition: `transform ${transitionDuration}ms ease-in-out`,
@@ -47,6 +48,7 @@ export {
     lightGrey,
     highlighed,
     transitionDuration,
+    transitionHideDuration,
     slideStyles,
     fadeStyles
 }

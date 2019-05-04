@@ -1,11 +1,11 @@
 import injectSheet from "react-jss";
-import {fadeStyles, lightGrey} from "./CommonStyles";
+import {fadeStyles, lightGrey, headerSize} from "./CommonStyles";
 
 const styles = () => ({
     root: {
         backgroundColor: lightGrey,
         width: "100%",
-        height: "100%",
+        height: `calc(100% - ${headerSize})`,
         position: "relative"
     },
     content: {
