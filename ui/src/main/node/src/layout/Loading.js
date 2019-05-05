@@ -14,7 +14,7 @@ const Loading = ({loading, classes}) => {
 
 const mapStateToProps = state => {
     return {
-        loading: state.loadingMarkers.length > 0
+        loading: state.loading.loadingMarkers.length > 0
     };
 };
 export default connect(mapStateToProps)(jss(Loading));

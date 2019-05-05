@@ -91,6 +91,6 @@ const SessionsTable = ({classes, events, rowsPerPage, handleChangeRowsPerPage, h
 );
 
 const mapStateToProps = (state) => ({
-    events: state.events
+    events: state.sessions.events
 });
 export default connect(mapStateToProps)(jss(SessionsTable));
