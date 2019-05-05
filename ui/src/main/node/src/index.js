@@ -9,32 +9,12 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "./theme";
 import "typeface-roboto";
 
-import home from "./pages/Home";
-import config from "./pages/Config";
-import sessions from "./pages/Sessions";
-import logout from "./pages/Logout";
+import config from "./appConfig";
 
 ReactDOM.render((<Provider store={store}>
     <MuiThemeProvider theme={theme}>
         <CssBaseline/>
-        <App config={{
-            storagePrefix: "auth-",
-            init: {
-                collapsed: true,
-            },
-            pages: [{
-                target: home,
-                sideBar: [sessions, config, logout]
-            }, {
-                target: sessions,
-                sideBar: [logout],
-                backTo: home
-            }, {
-                target: config,
-                sideBar: [logout],
-                backTo: home
-            }]
-        }}/>
+        <App config={config}/>
     </MuiThemeProvider>
 </Provider>), document.getElementById("root"));
 registerServiceWorker();
