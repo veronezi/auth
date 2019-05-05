@@ -1,19 +1,17 @@
 import injectSheet from "react-jss";
 import {collapsedLeftSize, expandedLeftSize, headerSize, transitionDuration} from "./CommonStyles";
 
-const global = {
-    "body": {
-        margin: 0,
-        padding: 0,
-        height: "100vh",
-    },
-    "#root": {
-        height: "100vh",
-    },
-};
-
 const styles = () => ({
-    "@global": global,
+    "@global": {
+        "body": {
+            margin: 0,
+            padding: 0,
+            height: "100vh",
+        },
+        "#root": {
+            height: "100vh",
+        },
+    },
     root: {
         height: "100vh",
         overflow: "hidden",
