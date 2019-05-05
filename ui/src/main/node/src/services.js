@@ -1,8 +1,8 @@
 import store from "./store";
-import {getInstance} from "./layout/Rest";
+import {getRestInstance} from "./library";
 import {EVENTS_LIST_UPDATED} from "./reducerSessions";
 
-const instance = getInstance(store);
+const instance = getRestInstance(store);
 const getSessions = (page, pageSize) => instance.get(`/api/sessions/${page}/${pageSize}`).then(resp => {
     store.dispatch({
         type: EVENTS_LIST_UPDATED,

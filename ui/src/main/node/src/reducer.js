@@ -1,6 +1,6 @@
 import {combineReducers} from "redux";
 import sessions from "./reducerSessions";
-import loading from "./layout/LoadingMarkerReducer";
+import {LoadingMarkerReducer as loading} from "./library";
 
 const rootReducer = combineReducers({
     sessions,

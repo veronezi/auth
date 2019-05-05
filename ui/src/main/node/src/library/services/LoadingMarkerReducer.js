@@ -1,11 +1,5 @@
 const init = {
     loadingMarkers: [],
-    events: {
-        rows: 0,
-        page: 1,
-        pages: 1,
-        data: []
-    }
 };
 
 const ADD_LOADING_MARKER = "ADD_LOADING_MARKER";
