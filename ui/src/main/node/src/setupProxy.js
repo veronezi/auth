@@ -1,3 +1,7 @@
+// This file is used in dev mode only.
+// When you run `npm start` it will try to grab the API ip from the system environment variable PROXY_AP...
+// ... if not found, it will try to load the ip from a running kubernetes service.
+
 const proxy = require('http-proxy-middleware');
 const {execSync} = require('child_process');
 const apiProxy = process.env.PROXY_API;
