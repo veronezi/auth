@@ -2,15 +2,24 @@
 
 image:https://travis-ci.org/veronezi/auth.svg?branch=master["Build Status", link="https://travis-ci.org/veronezi/auth"]
 
-== Whats in the box?
+== Build
 
-=== `/jwt-auth` and `/jwt-auth-docker`
+```
+mvn clean install
+```
 
-`/jwt-auth` is a nodejs restful application used by the system as JWT provider.
+== Deploy
 
-It exposes two endpoints: `POST /auth` and `GET /publickey`.
+After running the build command above, you can deploy it with...
 
-The first endpoint is used by the `/api` application (here: `api/src/main/java/todo/api/ApiAuth.java`) whenever the user
-tries to authenticate.
+```
+bash ./infra/target/helm/deploy.sh
+```
 
-`/jwt-auth-docker` wraps the application above on it's own docker image.
+== UI dev mode
+
+After deploying the application with the command above, you can run the UI in development mode with...
+
+```
+bash ui/src/main/node/devmode.sh
+```
