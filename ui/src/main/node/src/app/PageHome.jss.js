@@ -3,7 +3,7 @@ import injectSheet from "react-jss";
 const styles = (theme) => ({
     root: {
         height: "100%",
-        position: "relative"
+        position: "relative",
     },
     testIcon: {
         position: "absolute",

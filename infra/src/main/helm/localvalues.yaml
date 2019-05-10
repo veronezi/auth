@@ -1,0 +1,9 @@
+api:
+  image:
+    repository: localhost:32000/auth-api
+    tag: ${project.version}
+
+ui:
+  image:
+    repository: localhost:32000/auth-ui
+    tag: ${project.version}

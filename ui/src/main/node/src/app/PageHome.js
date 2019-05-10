@@ -1,8 +1,7 @@
-import React, {useState} from "react";
-import Loading from "./Loading";
+import React, {useEffect, useState} from "react";
 import classNames from "classnames";
 import jss from "./PageHome.jss";
-import rest from "../Rest";
+import {getSessions, authenticate} from "../services";
 import SessionsTable from "./SessionsTable";
 import SessionTest, {TITLE as testTitle} from "./SessionTest";
 import KeyIcon from "@material-ui/icons/VpnKey";
@@ -10,7 +9,7 @@ import Fab from "@material-ui/core/Fab";
 
 const initPageSize = 25;
 const initPage = 0;
-rest.getSessions(initPage + 1, initPageSize);
+let loaded = false;
 
 const PageHome = ({classes}) => {
     const [pageSize, setPageSize] = useState(initPageSize);
@@ -19,23 +18,28 @@ const PageHome = ({classes}) => {
     const handleChangePage = (newPage) => {
         if (newPage !== page) {
             setPage(newPage);
-            rest.getSessions(newPage + 1, pageSize);
+            getSessions(newPage + 1, pageSize);
         }
     };
     const handleChangeRowsPerPage = (newPageSize) => {
         if (newPageSize !== pageSize) {
             setPageSize(newPageSize);
-            rest.getSessions(page + 1, newPageSize);
+            getSessions(page + 1, newPageSize);
         }
     };
     const onAuthenticate = (name, password) => {
-        rest.authenticate(name, password).then(() => {
-            rest.getSessions(page + 1, pageSize);
+        authenticate(name, password).then(() => {
+            getSessions(page + 1, pageSize);
         });
     };
+    useEffect(() => {
+        if(!loaded) {
+            loaded = true;
+            getSessions(initPage + 1, initPageSize);
+        }
+    });
     return (
         <div className={classNames(classes.root)}>
-            <Loading/>
             <SessionTest
                 open={testOpen}
                 onClose={() => setTestOpen(false)}
