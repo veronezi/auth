@@ -1,5 +1,5 @@
 import store from "./store";
-import {getRestInstance} from "./library";
+import {getRestInstance} from "veronezi-samples-common-ui";
 import {EVENTS_LIST_UPDATED} from "./reducerSessions";
 
 const instance = getRestInstance(store);

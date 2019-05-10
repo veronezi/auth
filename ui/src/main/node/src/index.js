@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {App} from "./library";
+import {App} from "veronezi-samples-common-ui";
 import registerServiceWorker from "./registerServiceWorker";
 import store from "./store";
 import {Provider} from "react-redux";
