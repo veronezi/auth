@@ -33,6 +33,9 @@ const createAccessTokenObj = (username) => jwt.sign({
     sub: username,
     iss: tokenIss,
     aud: tokenAud,
+    iat: new Date().getTime() / 1000,
+    alg: algorithm,
+    typ: "JWT",
     groups
 }, privateKey, {
     expiresIn: accessTokenExpiration,
